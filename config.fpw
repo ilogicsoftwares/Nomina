@@ -1,0 +1,8 @@
+SCREEN=OFF
+SAFETY = OFF 
+TALK= OFF 
+ECHO= OFF 
+RESOURCE= OFF
+ESCAPE=OFF
+nempresa="Ilogic Softwares C.A."
+
