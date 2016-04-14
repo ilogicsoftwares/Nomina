@@ -13,7 +13,7 @@ odbcnombre=""
 odbcclave=""
 odbcusuario=""
 odbcdatabase=""
-initf=FILETOSTR('c:\nomina\firstini.cfg')
+initf=FILETOSTR('firstini.cfg')
 
 ALINES(initarray,initf)
 
