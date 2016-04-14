@@ -1,6 +1,6 @@
 *       *********************************************************
 *       *                                                         
-*       * 04/13/16              MENU1.MPR               21:30:38  
+*       * 04/14/16              MENU1.MPR               00:57:18  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
@@ -132,14 +132,14 @@ ENDIF
 
 DEFINE PAD iniciomenu OF (m.cMenuName) PROMPT "Inicio" COLOR SCHEME 3 ;
 	KEY ALT+I, ""
-DEFINE PAD _4m01a3rp0 OF (m.cMenuName) PROMPT "Procesos" COLOR SCHEME 3 ;
+DEFINE PAD _4m1021oyz OF (m.cMenuName) PROMPT "Procesos" COLOR SCHEME 3 ;
 	KEY ALT+P, ""
-DEFINE PAD _4m01a3rp1 OF (m.cMenuName) PROMPT "Utilidades" COLOR SCHEME 3 ;
+DEFINE PAD _4m1021oz0 OF (m.cMenuName) PROMPT "Utilidades" COLOR SCHEME 3 ;
 	KEY ALT+U, ""
-DEFINE PAD _4m01a3rp2 OF (m.cMenuName) PROMPT "Ayuda" COLOR SCHEME 3 ;
+DEFINE PAD _4m1021oz1 OF (m.cMenuName) PROMPT "Ayuda" COLOR SCHEME 3 ;
 	KEY ALT+A, ""
 ON PAD iniciomenu OF (m.cMenuName) ACTIVATE POPUP (a_menupops[1])
-ON PAD _4m01a3rp0 OF (m.cMenuName) ACTIVATE POPUP (a_menupops[4])
+ON PAD _4m1021oyz OF (m.cMenuName) ACTIVATE POPUP (a_menupops[4])
 
 DEFINE POPUP (a_menupops[1]) MARGIN RELATIVE SHADOW COLOR SCHEME 4
 DEFINE BAR 1 OF (a_menupops[1]) PROMPT "Nuevo"
@@ -161,25 +161,25 @@ DEFINE BAR 7 OF (a_menupops[2]) PROMPT "Conceptos"
 DEFINE BAR 8 OF (a_menupops[2]) PROMPT "Variables"
 DEFINE BAR 9 OF (a_menupops[2]) PROMPT "Procedimientos"
 ON SELECTION BAR 1 OF (a_menupops[2]) ;
-	DO _4m01a3rp5 ;
+	DO _4m1021oz2 ;
 	IN LOCFILE("\NOMINA\MENU1" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENU1?")
 ON SELECTION BAR 2 OF (a_menupops[2]) ;
-	DO _4m01a3rp6 ;
+	DO _4m1021oz3 ;
 	IN LOCFILE("\NOMINA\MENU1" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENU1?")
 ON SELECTION BAR 3 OF (a_menupops[2]) ;
-	DO _4m01a3rp7 ;
+	DO _4m1021oz4 ;
 	IN LOCFILE("\NOMINA\MENU1" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENU1?")
 ON SELECTION BAR 4 OF (a_menupops[2]) ;
-	DO _4m01a3rp8 ;
+	DO _4m1021oz5 ;
 	IN LOCFILE("\NOMINA\MENU1" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENU1?")
 ON SELECTION BAR 5 OF (a_menupops[2]) ;
-	DO _4m01a3rp9 ;
+	DO _4m1021oz6 ;
 	IN LOCFILE("\NOMINA\MENU1" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENU1?")
 ON SELECTION BAR 7 OF (a_menupops[2]) ;
-	DO _4m01a3rpa ;
+	DO _4m1021oz7 ;
 	IN LOCFILE("\NOMINA\MENU1" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENU1?")
 ON SELECTION BAR 8 OF (a_menupops[2]) ;
-	DO _4m01a3rpb ;
+	DO _4m1021oz8 ;
 	IN LOCFILE("\NOMINA\MENU1" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENU1?")
 
 DEFINE POPUP (a_menupops[3]) MARGIN RELATIVE SHADOW COLOR SCHEME 4
@@ -194,7 +194,7 @@ DEFINE POPUP (a_menupops[5]) MARGIN RELATIVE SHADOW COLOR SCHEME 4
 DEFINE BAR 1 OF (a_menupops[5]) PROMPT "Pre-nomina"
 DEFINE BAR 2 OF (a_menupops[5]) PROMPT "Generar Nomina"
 ON SELECTION BAR 1 OF (a_menupops[5]) ;
-	DO _4m01a3rpc ;
+	DO _4m1021ozf ;
 	IN LOCFILE("\NOMINA\MENU1" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENU1?")
 
 ACTIVATE MENU (m.cMenuName) NOWAIT
@@ -207,7 +207,7 @@ ENDIF
 
 *       *********************************************************
 *       *                                                         
-*       * _4M01A3RP5  ON SELECTION BAR 1 OF POPUP nuevo           
+*       * _4M1021OZ2  ON SELECTION BAR 1 OF POPUP nuevo           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -218,7 +218,7 @@ ENDIF
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _4m01a3rp5
+PROCEDURE _4m1021oz2
 abrirform("frmtrabajador")
 
 
@@ -226,7 +226,7 @@ abrirform("frmtrabajador")
 
 *       *********************************************************
 *       *                                                         
-*       * _4M01A3RP6  ON SELECTION BAR 2 OF POPUP nuevo           
+*       * _4M1021OZ3  ON SELECTION BAR 2 OF POPUP nuevo           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -237,14 +237,14 @@ abrirform("frmtrabajador")
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _4m01a3rp6
+PROCEDURE _4m1021oz3
 abrirform("frmcargo")
 
 
 
 *       *********************************************************
 *       *                                                         
-*       * _4M01A3RP7  ON SELECTION BAR 3 OF POPUP nuevo           
+*       * _4M1021OZ4  ON SELECTION BAR 3 OF POPUP nuevo           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -255,13 +255,13 @@ abrirform("frmcargo")
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _4m01a3rp7
+PROCEDURE _4m1021oz4
 abrirform("frmdepartamento")
 
 
 *       *********************************************************
 *       *                                                         
-*       * _4M01A3RP8  ON SELECTION BAR 4 OF POPUP nuevo           
+*       * _4M1021OZ5  ON SELECTION BAR 4 OF POPUP nuevo           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -272,13 +272,13 @@ abrirform("frmdepartamento")
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _4m01a3rp8
+PROCEDURE _4m1021oz5
 abrirform('frmnomina')
 
 
 *       *********************************************************
 *       *                                                         
-*       * _4M01A3RP9  ON SELECTION BAR 5 OF POPUP nuevo           
+*       * _4M1021OZ6  ON SELECTION BAR 5 OF POPUP nuevo           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -289,13 +289,13 @@ abrirform('frmnomina')
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _4m01a3rp9
+PROCEDURE _4m1021oz6
 abrirform('frmjornada')
 
 
 *       *********************************************************
 *       *                                                         
-*       * _4M01A3RPA  ON SELECTION BAR 7 OF POPUP nuevo           
+*       * _4M1021OZ7  ON SELECTION BAR 7 OF POPUP nuevo           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -306,14 +306,14 @@ abrirform('frmjornada')
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _4m01a3rpa
+PROCEDURE _4m1021oz7
 abrirform("frmconceptos")
 
 
 
 *       *********************************************************
 *       *                                                         
-*       * _4M01A3RPB  ON SELECTION BAR 8 OF POPUP nuevo           
+*       * _4M1021OZ8  ON SELECTION BAR 8 OF POPUP nuevo           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -324,13 +324,13 @@ abrirform("frmconceptos")
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _4m01a3rpb
+PROCEDURE _4m1021oz8
 abrirform('frmvarsys')
 
 
 *       *********************************************************
 *       *                                                         
-*       * _4M01A3RPC  ON SELECTION BAR 1 OF POPUP _49f0yqri3      
+*       * _4M1021OZF  ON SELECTION BAR 1 OF POPUP _49f0yqri3      
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -341,5 +341,5 @@ abrirform('frmvarsys')
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _4m01a3rpc
+PROCEDURE _4m1021ozf
 abrirform('prenomina')
