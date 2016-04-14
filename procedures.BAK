@@ -570,7 +570,6 @@ PROCEDURE CREARMENU()
 PARAMETERS USUARIO
 SQLEXEC(GNX,"SELECT * FROM USERMENU WHERE IDUSUARIO=?USUARIO AND SELECCIONADO>=1","MUSER")
 
-
 CLEAR
 
 SET SYSMENU SAVE
@@ -633,6 +632,7 @@ FOR P=1 TO RECCOUNT('POPUS')
 		ELSE
 			IF NOT ISNULL(PARIENTE.ACCION)
 				TRY
+				MESSAGEBOX(PAD())
 				&trp
 				CATCH TO OEX
 
@@ -795,14 +795,14 @@ ENDFUNC
 FUNCTION verificarfechas()
 LPARAMETERS vrfecha1,vrfecha2,vnominatype
 
-SQLEXEC(GNX,"SELECT DESDE,HASTA from nominauni WHERE nominatype=? and DESDE<=?vrfecha1 AND HASTA>=?vrfecha1","SQLR")
+SQLEXEC(GNX,"SELECT DESDE,HASTA from nominauni WHERE nominatype=?vnominatype and DESDE<=?vrfecha1 AND HASTA>=?vrfecha1","SQLR")
 
 IF RECCOUNT('SQLR')>0 THEN
 
 RETURN 1
 USE IN sqlr 
 ELSE
-SQLEXEC(GNX,"SELECT DESDE,HASTA from nominauni WHERE nominatype=? and DESDE<=?vrfecha2 AND HASTA>=?vrfecha2","SQLR2")
+SQLEXEC(GNX,"SELECT DESDE,HASTA from nominauni WHERE nominatype=?vnominatype and DESDE<=?vrfecha2 AND HASTA>=?vrfecha2","SQLR2")
 IF RECCOUNT('SQLR2')>0 THEN
 RETURN 2
 USE IN sqlr2

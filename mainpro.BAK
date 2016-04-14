@@ -3,7 +3,7 @@ SET DATE BRITISH
 
 Set Decimals To 2
 
-_Screen.Visible = .F.
+*_Screen.Visible = .F.
 PUBLIC odbcnombre,odbcclave,odbcusuario,odbcdatabase,npath,frmmain,frmmenu,elgue
 PUBLIC gnx
 PUBLIC esteform

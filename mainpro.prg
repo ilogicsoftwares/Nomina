@@ -9,6 +9,7 @@ PUBLIC gnx
 PUBLIC esteform
 PUBLIC IDT AS Integer 
 PUBLIC rfecha1,rfecha2 as date
+PUBLIC menusel
 odbcnombre=""
 odbcclave=""
 odbcusuario=""
