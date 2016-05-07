@@ -1,4 +1,7 @@
-
+PUBLIC gnx
+Store SQLConnect('nomina', 'root', '693693123456') To gnx
+SET DEFAULT TO c:\nomina\
+SET PROCEDURE TO procedures
 procedure ejecutarsqls
 LPARAMETERS sfile,db
 Store SQLConnect('nomina', 'root', '693693123456') To gnx2
@@ -568,7 +571,7 @@ ENDPROC
 
 PROCEDURE CREARMENU()
 PARAMETERS USUARIO
-SQLEXEC(GNX,"SELECT * FROM USERMENU WHERE IDUSUARIO=?USUARIO AND SELECCIONADO>=1","MUSER")
+SQLEXEC(GNX,"SELECT * FROM USERMENU WHERE IDUSUARIO=?USUARIO AND SELECCIONADO>=1 ORDER BY ID","MUSER")
 
 CLEAR
 
@@ -632,7 +635,7 @@ FOR P=1 TO RECCOUNT('POPUS')
 		ELSE
 			IF NOT ISNULL(PARIENTE.ACCION)
 				TRY
-				MESSAGEBOX(PAD())
+				
 				&trp
 				CATCH TO OEX
 
@@ -818,3 +821,137 @@ ENDIF
 ENDFUNC
 
 
+**** OPCIONES DE MENU
+FUNCTION BORRARITEM()
+PARAMETERS IDMENU AS String
+
+TP=SQLEXEC(GNX,"DELETE FROM MENU WHERE NOMBRE=?IDMENU")
+
+SQLEXEC(GNX,"DELETE FROM userMENU WHERE NOMBRE=?IDMENU")
+SQLEXEC(GNX,"DELETE FROM menulimited WHERE NOMBRE=?IDMENU")
+
+IF TP=1 THEN
+
+MSG("Se ha eliminado el Item","I")
+ENDIF
+
+
+ENDFUNC
+
+FUNCTION AGREGARITEM()
+LPARAM	 dpaNOMBRE AS STRING,MENUPADRE AS String,FUNCION AS String
+IF EMPTY(menupadre) then
+xatipo=0
+hijo=1
+ELSE
+
+xatipo=4
+hijo=null
+ENDIF
+
+
+SQLEXEC(GNX,"SELECT * FROM MENU","menu")
+SELECT * FROM MENU WHERE NOMBRE==MENUPADRE INTO CURSOR idmp
+IDA=ALLTRIM(IDMP.ID)
+IDP="'%"+ALLTRIM(IDMP.ID)+"%'"
+a=0
+counta=1
+DO WHILE a=0
+SELECT * FROM menu WHERE id == ida+ALLTRIM(STR(counta)) INTO CURSOR metiendo
+IF RECCOUNT('metiendo')>0 then
+a=0
+counta=counta+1
+ELSE
+NEWID=ida+ALLTRIM(STR(counta))
+a=1
+endif
+ENDDO
+
+
+
+
+atr=SQLEXEC(gnx,"insert into MENU (id,nombre,tipo,pariente,Accion,Seleccionado,hijos) values (?newid,?dpaNOMBRE,?xatipo,?ida,?funcion,1,?hijo)")
+atr2=SQLEXEC(gnx,"insert into MENUlimited (id,nombre,tipo,pariente,Accion,Seleccionado,hijos) values (?newid,?dpaNOMBRE,?xatipo,?ida,?funcion,1,?hijo)")
+****+ chequeo 
+SQLEXEC(gnx,"select distinct idusuario from usermenu","usuarios")
+SELECT usuarios
+GO top
+FOR i=1 TO RECCOUNT('usuarios')
+iduse=usuarios.idusuario
+
+atr3=SQLEXEC(gnx,"insert into userMENU (id,nombre,tipo,pariente,Accion,Seleccionado,hijos,idusuario,guardar,editar,eliminar) values (?newid,?dpaNOMBRE,?xatipo,?ida,?funcion,1,?hijo,?iduse,1,1,1)")
+skip
+endfor
+
+
+
+IF atr=1 and atr2=1 and atr3=1 then
+msg("Se ha Agregado el menu " + dpanombre,"I")
+ELSE
+
+msg("Error Al Crear el Item de Menu","E")
+
+ENDIF
+
+ENDFUNC
+
+procedure Obtenermenu()
+
+SQLEXEC(gnx,"select Id, Nombre from menu where tipo=0","items")
+SELECT items
+BROWSE
+
+
+ENDPROC 
+
+PROCEDURE CrearMenuPadre()
+LPARAMETERS dpaNombre as String, posicion as Integer
+SQLEXEC(gnx,"select Id, Nombre from menu where tipo=0","items")
+CANTINDAM=RECCOUNT('ITEMS')
+PUBLIC a as 
+DIMENSION letras (11)
+
+
+STORE "A" TO letras(1)
+STORE "B" TO letras(2)
+STORE "C" TO letras(3)
+STORE "D" TO letras(4)
+STORE "E" TO letras(5)
+STORE "F" TO letras(6)
+STORE "G" TO letras(7)
+STORE "H" TO letras(8)
+STORE "I" TO letras(9)
+STORE "J" TO letras(10)
+STORE "K" TO letras(11)
+letraabuscar="'%"+letras(posicion)+"%'"
+SQLEXEC(gnx,"SELECT * FROM `usermenu` WHERE `id` LIKE "+LETRAABUSCAR,"EPOS")
+
+IF RECCOUNT('EPOS')>0 THEN
+
+FOR T = 10 TO POSICION STEP -1
+LETRAACTUAL=LETRAs(T)
+LETRANUEVA=LETRAs(T+1)
+
+SQLEXEC(GNX,"UPDATE menu SET id=REPLACE(ID,?LETRAACTUAL,?LETRANUEVA) ,PARIENTE=REPLACE(PARIENTE,?LETRAACTUAL,?LETRANUEVA)")
+SQLEXEC(GNX,"UPDATE menuLIMITED SET id=REPLACE(ID,?LETRAACTUAL,?LETRANUEVA) ,PARIENTE=REPLACE(PARIENTE,?LETRAACTUAL,?LETRANUEVA)")
+SQLEXEC(GNX,"UPDATE USERmenu SET id=REPLACE(ID,?LETRAACTUAL,?LETRANUEVA) ,PARIENTE=REPLACE(PARIENTE,?LETRAACTUAL,?LETRANUEVA)")
+
+
+ENDFOR
+NEXTID=LETRAS(POSICION)+"1"
+SQLEXEC(gnx,"insert into MENU (id,nombre,tipo,pariente,Accion,Seleccionado,hijos) values (?nextid,?dpaNOMBRE,0,'','',1,1)")
+SQLEXEC(gnx,"insert into MENULIMITED (id,nombre,tipo,pariente,Accion,Seleccionado,hijos) values (?nextid,?dpaNOMBRE,0,'','',1,1)")
+SQLEXEC(gnx,"select distinct idusuario from usermenu","usuarios")
+SELECT usuarios
+GO top
+FOR i=1 TO RECCOUNT('usuarios')
+iduse=usuarios.idusuario
+SQLEXEC(gnx,"insert into userMENU (id,nombre,tipo,pariente,Accion,Seleccionado,hijos,idusuario,guardar,editar,eliminar) values (?nextid,?dpaNOMBRE,0,'','',1,1,?iduse,1,1,1)")
+skip
+endfor
+
+ENDIF
+
+ 
+
+ENDPROC
