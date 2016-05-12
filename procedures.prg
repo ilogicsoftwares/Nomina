@@ -185,7 +185,7 @@ Procedure CARGATEXTBOXS
 Lparameters Combo As String,TABLA As String, campo As String,condicion as String 
 If Used('CPRIME') Then
 	Use In cprime
-	bbr="_screen.ActiveForm" + "." +  Combo+"." +"clear"
+	bbr="FORMACTIVE" + "." +  Combo+"." +"clear"
 	&bbr
 Endif
 prime="select " + campo + " from " + TABLA + " " +condicion + " order by " + campo
@@ -197,8 +197,8 @@ If AAA >0 Then
 	Select cprime
 	Go Top
 	For k =1 To CANTIDADR
-		bbb="_screen.ActiveForm" + "." +  Combo+"." +"AddITEM"
-		bba="_screen.ActiveForm" + "." +  Combo+"." +"style"
+		bbb="FORMACTIVE" + "." +  Combo+"." +"AddITEM"
+		bba="FORMACTIVE" + "." +  Combo+"." +"style"
 		&bba=2
 		&bbb(&datosx,k,1)
 		Skip
@@ -545,7 +545,7 @@ PROCEDURE  LUNESDELINTERVALO()
 fec=rfecha1
 ccont=0
 FOR z=DAY(rfecha1) TO DAY(rfecha2)
-IF CDOW(fec)="Lunes" then
+IF CDOW(fec)="Lunes" OR CDOW(fec)="Monday" then
 ccont=ccont+1
 ENDIF
 fec=fec+1
