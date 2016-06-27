@@ -4,7 +4,7 @@ SET DEFAULT TO c:\nomina\
 SET PROCEDURE TO procedures
 procedure ejecutarsqls
 LPARAMETERS sfile,db
-Store SQLConnect('nomina', 'root', '693693123456') To gnx2
+Store SQLConnect('nominaf', 'root', '693693123456') To gnx2
 SQLEXEC(gnx2,'use ' + db)
 sscript=FILETOSTR(sfile)
 
@@ -106,7 +106,7 @@ ENDFUNC
 
 FUNCTION guardardatosenform
 LPARAMETERS tabla,nformulario,aviso
-Store SQLConnect('nomina', 'root', '693693123456') To gnx2
+Store SQLConnect('nominaf', 'root', '693693123456') To gnx2
 loscampos=""
 losvalores=""
 separador=","
